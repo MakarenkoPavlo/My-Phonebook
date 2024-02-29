@@ -2,7 +2,7 @@ import { useId } from "react";
 import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { nanoid } from "nanoid";
-import { addContact } from "../../redux/operations";
+import { addContact } from "../../redux/Contacts/operations";
 import { useDispatch } from "react-redux";
 
 const userSchema = Yup.object().shape({

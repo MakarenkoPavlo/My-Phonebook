@@ -3,8 +3,8 @@ import { useEffect } from 'react';
 import ContactForm from './ContactForm/ContactForm';
 import ContactList from './ContactList/ContactList';
 import SearchForm from './SearchForm/SearchForm';
-import { selectLoading, selectError } from '../redux/selectors'
-import { fetchContacts } from '../redux/operations'
+import { selectLoading, selectError } from '../redux/Contacts/selectors'
+import { fetchContacts } from '../redux/Contacts/operations'
 
 export default function App() {
   const dispatch = useDispatch();
