@@ -10,28 +10,28 @@ const userSchema = Yup.object().shape({
     .required("Name is required")
     .min(3, "Minimum 3 characters")
     .max(50, "Maximum 50 characters"),
-  phone: Yup.string()
-    .required("Number is required")
+  number: Yup.string()
+    .required("number is required")
     .min(3, "Minimum 3 characters")
     .max(50, "Maximum 50 characters")
-    .matches(/^\+?[0-9\s-]+$/, "Invalid phone number"),
+    .matches(/^\+?[0-9\s-]+$/, "Invalid number number"),
 });
 
 const initialValues = {
   name: '',
-  phone: '',
+  number: '',
 };
 
 export default function ContactForm () {
   const nameId = useId();
-  const phoneId = useId();
+  const NumberId = useId();
   const dispatch = useDispatch();
 
   const handleAddContact = (values, { resetForm }) => {
   const newContact = {
     id: nanoid(),
     name: values.name,
-    phone: values.phone,
+    number: values.number,
   };
   dispatch(addContact(newContact)).then(() => resetForm());
 };
@@ -58,14 +58,14 @@ export default function ContactForm () {
            </div>
 
           <div>
-            <label htmlFor={phoneId}>Number</label>
+            <label htmlFor={NumberId}>number</label>
             <Field
               type="tel"
-              name="phone"
-              id={phoneId}
+              name="number"
+              id={NumberId}
             />       
             <ErrorMessage
-              name="phone"
+              name="number"
               component="span"
             />
           </div>

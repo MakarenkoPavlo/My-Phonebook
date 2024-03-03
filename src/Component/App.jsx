@@ -1,31 +1,59 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import ContactForm from './ContactForm/ContactForm';
-import ContactList from './ContactList/ContactList';
-import SearchForm from './SearchForm/SearchForm';
-import { selectLoading, selectError } from '../redux/Contacts/selectors'
-import { fetchContacts } from '../redux/Contacts/operations'
+import { useEffect, lazy } from 'react';
+import { useDispatch } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
+import { Layout } from './Layout';
+import { PrivateRoute } from './PrivateRoute';
+import { RestrictedRoute } from './RestrictedRoute';
+import { refreshUser } from "../redux/Auth/operations";
+import { useAuth } from '../hooks';
 
-export default function App() {
+const HomePage = lazy(() => import('../pages/Home/Home'));
+const RegisterPage = lazy(() => import('../pages/Register/Register'));
+const LoginPage = lazy(() => import('../pages/Login/Login'));
+const PhonebookPage = lazy(() => import('../pages/Phonebook/Phonebook'));
+const NotFoundPage = lazy(() => import('../pages/NotFound/NotFound'));
+
+export const App = () => {
   const dispatch = useDispatch();
-  const loading = useSelector(selectLoading);
-  const error = useSelector(selectError);
-  
+  const { isRefreshing } = useAuth();
+
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(refreshUser());
   }, [dispatch]);
-  
-  return (
-    <div>
-     
-        <h1>Phonebook</h1>
-      <ContactForm />
-      <SearchForm />
-       {loading && !error && <b>Request in progress...</b>}
-      <ContactList />
-      {error && <p>Failed to fetch contacts</p>}
-   
-      
-    </div>
+
+  return isRefreshing ? (
+    <b>Refreshing user...</b>
+  ) : (
+    <>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route
+            path="/register"
+            element={
+              <RestrictedRoute
+                redirectTo="/Phonebook"
+                component={<RegisterPage />}
+              />
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <RestrictedRoute redirectTo="/Phonebook" component={<LoginPage />} />
+            }
+          />
+          <Route
+            path="/Phonebook"
+            element={
+              <PrivateRoute redirectTo="/login" component={<PhonebookPage />} />
+            }
+          />
+          </Route>
+           <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+      <Toaster />
+    </>
   );
-}
+};
