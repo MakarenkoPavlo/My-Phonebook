@@ -12,7 +12,6 @@ const HomePage = lazy(() => import('../pages/Home/Home'));
 const RegisterPage = lazy(() => import('../pages/Register/Register'));
 const LoginPage = lazy(() => import('../pages/Login/Login'));
 const PhonebookPage = lazy(() => import('../pages/Phonebook/Phonebook'));
-const NotFoundPage = lazy(() => import('../pages/NotFound/NotFound'));
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -51,7 +50,6 @@ export const App = () => {
             }
           />
           </Route>
-           <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Toaster />
     </>
