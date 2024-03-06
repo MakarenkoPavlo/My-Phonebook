@@ -10,7 +10,7 @@ const ContactList = () => {
   const filterLowerCase = typeof filter === 'string' ? filter.toLowerCase() : '';
   return (
     contact.name.toLowerCase().includes(filterLowerCase) ||
-    contact.phone.toLowerCase().includes(filterLowerCase)
+    contact.number.toLowerCase().includes(filterLowerCase)
   );
 });
 

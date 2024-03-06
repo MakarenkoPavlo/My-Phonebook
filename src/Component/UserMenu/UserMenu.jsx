@@ -1,17 +1,18 @@
 import { useDispatch } from 'react-redux';
 import { logOut } from '../../redux/Auth/operations';
 import { useAuth } from '../../hooks/useAuth';
-import { FaRegUser } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
+import css from './UserMenu.module.css';
 
 export const UserMenu = () => {
   const dispatch = useDispatch();
   const { user } = useAuth();
 
   return (
-      <header>
-        <FaRegUser />
-        <p>Welcome, {user.name}</p>
-        <button type="button" onClick={() => dispatch(logOut())}>
+      <header className={css.header}>
+        <FaUser />
+        <p className={css.title}>Welcome, {user.name}</p>
+        <button type="button" className={css.button} onClick={() => dispatch(logOut())}>
         Logout
         </button>
     </header>

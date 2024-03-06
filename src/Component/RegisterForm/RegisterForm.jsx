@@ -2,6 +2,10 @@ import { useDispatch } from "react-redux";
 import { register } from "../../redux/Auth/operations";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
+import css from './RegisterForm.module.css'
+import { FaUser } from 'react-icons/fa';
+import { MdAttachEmail } from "react-icons/md";
+import { RiLockPasswordFill } from "react-icons/ri";
 
 const userSchema = Yup.object().shape({
     name: Yup.string()
@@ -47,24 +51,28 @@ export const RegisterForm = () => {
             validationSchema={userSchema}
             onSubmit={handleSubmit}
         >
-            <Form autoComplete="off">
-                <div>
-                    <label>Name</label>
+            <div className={css.container}>
+                <h2 className={css.header}>Register</h2>
+                <Form autoComplete="off">
+                <div className={css.group}>
+                    <label> <FaUser className={css.icon} /> Name</label>
                     <Field type="text" name="name" />
-                    <ErrorMessage name="name" component="span" />
+                    <ErrorMessage name="name" component="span" className={css.error}/>
                 </div>
-                <div>
-                    <label>Email</label>
+                <div className={css.group}>
+                        <label><MdAttachEmail className={css.icon} /> Email</label>
                     <Field type="email" name="email" />
-                    <ErrorMessage name="email" component="span" />
+                    <ErrorMessage name="email" component="span" className={css.error}/>
                 </div>
-                <div>
-                    <label>Password</label>
+                <div className={css.group}>
+                    <label><RiLockPasswordFill />Password</label>
                     <Field type="password" name="password" />
-                    <ErrorMessage name="password" component="span" />
+                    <ErrorMessage name="password" component="span" className={css.error}/>
                 </div>
-                <button type="submit">Register</button>
+                    <button type="submit" className={css.button}>Register</button>
             </Form>
+            </div>
+            
         </Formik>
     )
 }

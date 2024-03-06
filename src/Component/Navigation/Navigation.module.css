@@ -3,9 +3,16 @@
   text-decoration: none;
   padding: 12px;
   font-weight: 700;
+  font-size: 20px;
   color: #2a363b;
 }
 
 .link.active {
-  color: #e84a5f;
+  color: #4ae8ae;
+}
+
+.nav {
+  display: flex;
+  gap: 40px;
+  margin-left: 40px;
 }
