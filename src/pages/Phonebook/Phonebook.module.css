@@ -1,0 +1,44 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+  padding: 20px;
+  background-color: #faf9f7;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.addContact {
+  flex: 0 0 45%; 
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.contactList {
+  flex: 0 0 45%; 
+  padding: 0px 20px ;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  overflow-y: auto; 
+  max-height: 500px; 
+}
+
+.title {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.loading {
+  text-align: center;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.error {
+  text-align: center;
+  color: red;
+}

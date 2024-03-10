@@ -4,6 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { nanoid } from "nanoid";
 import { addContact } from "../../redux/Contacts/operations";
 import { useDispatch } from "react-redux";
+import css from './ContactForm.module.css'
 
 const userSchema = Yup.object().shape({
   name: Yup.string()
@@ -43,8 +44,10 @@ export default function ContactForm () {
         validationSchema={userSchema}
         onSubmit={handleAddContact}
       >
-        <Form autoComplete="off">
-          <div>
+        <div className={css.container}>
+          <h2 className={css.header}>Add contact</h2>
+          <Form autoComplete="off">
+          <div className={css.group}>
             <label htmlFor={nameId}>Name</label>
             <Field
               type="text"
@@ -53,11 +56,12 @@ export default function ContactForm () {
             />
              <ErrorMessage
               name="name"
-              component="span"
+                component="span"
+                className={css.error}
               />
            </div>
 
-          <div>
+          <div className={css.group}>
             <label htmlFor={NumberId}>number</label>
             <Field
               type="tel"
@@ -66,12 +70,15 @@ export default function ContactForm () {
             />       
             <ErrorMessage
               name="number"
-              component="span"
+                component="span"
+                className={css.error}
             />
           </div>
 
-          <button type="submit">Add contact</button>
+          <button type="submit" className={css.button}>Add contact</button>
         </Form>
+        </div>
+        
       </Formik>
     </div>
   );

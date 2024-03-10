@@ -5,7 +5,7 @@ import { selectLoading, selectError } from '../../redux/Contacts/selectors';
 import ContactForm from '../../Component/ContactForm/ContactForm';
 import ContactList from '../../Component/ContactList/ContactList';
 import SearchForm from '../../Component/SearchForm/SearchForm';
-
+import css from './Phonebook.module.css'
 
 export default function Phonebook () {
     
@@ -19,15 +19,18 @@ export default function Phonebook () {
     
      return (
     <div>
-     
-        <h1>Phonebook</h1>
-      <ContactForm />
-      <SearchForm />
-       {loading && !error && <b>Request in progress...</b>}
-      <ContactList />
-      {error && <p>Failed to fetch contacts</p>}
-   
-      
+      <h1 className={css.title}>Phonebook</h1>
+      <div className={css.container}>
+        <div className={css.addContact}>
+          <ContactForm />
+          <SearchForm />
+          {loading && !error && <p className={css.loading}>Request in progress...</p>}
+        </div>
+        <div className={css.contactList}>
+          <ContactList />
+          {error && <p className={css.error}>Failed to fetch contacts</p>}
+        </div>
+      </div>
     </div>
   );
 
