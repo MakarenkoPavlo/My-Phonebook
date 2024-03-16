@@ -36,7 +36,7 @@ export const Contact = ({ contact }) => {
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={() => setModalIsOpen(false)}
-        className={css.modal} // Добавьте класс для модального окна
+        className={css.modal}
       >
         <h2>Are you sure you want to delete this contact?</h2>
         <div className={css.containerButton}>

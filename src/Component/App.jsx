@@ -1,12 +1,13 @@
 import { useEffect, lazy } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast';
+import { Toaster, toast } from 'react-hot-toast';
 import { Layout } from './Layout';
 import { PrivateRoute } from './PrivateRoute';
 import { RestrictedRoute } from './RestrictedRoute';
 import { refreshUser } from "../redux/Auth/operations";
 import { useAuth } from '../hooks';
+import NotFound from '../pages/NotFound/NotFound';
 
 const HomePage = lazy(() => import('../pages/Home/Home'));
 const RegisterPage = lazy(() => import('../pages/Register/Register'));
@@ -18,13 +19,16 @@ export const App = () => {
   const { isRefreshing } = useAuth();
 
   useEffect(() => {
-    dispatch(refreshUser());
+    dispatch(refreshUser()).catch(error => {
+      toast.error('Failed to refresh user: ' + error.message);
+    });
   }, [dispatch]);
 
   return isRefreshing ? (
     <b>Refreshing user...</b>
   ) : (
     <>
+      <Toaster />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
@@ -49,9 +53,9 @@ export const App = () => {
               <PrivateRoute redirectTo="/login" component={<PhonebookPage />} />
             }
           />
-          </Route>
+        </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
-      <Toaster />
     </>
   );
 };
