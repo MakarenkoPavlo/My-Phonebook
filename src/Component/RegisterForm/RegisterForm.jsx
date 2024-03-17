@@ -29,7 +29,7 @@ const initialValues = {
 export const RegisterForm = () => {
     const dispatch = useDispatch();
 
-    const handleSubmit = async (values, formikBag) => {
+    const handleSubmit = async (values) => {
         try {
             await dispatch(
                 register({
@@ -39,7 +39,6 @@ export const RegisterForm = () => {
                 })
             ).unwrap();
             console.log('Регистрация прошла успешно');
-            formikBag.resetForm();
         } catch (error) {
             console.log('Ошибка при регистрации', error);
         }

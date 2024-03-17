@@ -6,7 +6,6 @@ import * as Yup from "yup";
 import css from './LoginForm.module.css'
 import { MdAttachEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { toast } from 'react-hot-toast';
 
 
 const userSchema = Yup.object().shape({
@@ -25,17 +24,11 @@ export const LoginForm = () => {
   const dispatch = useDispatch();
   const [error, setError] = useState('');
 
-  const handleSubmit = async (values, formikBag) => {
+  const handleSubmit = async (values) => {
     try {
       await dispatch(logIn(values));
-      formikBag.resetForm();
     } catch (error) {
-      if (error.response && error.response.status === 400) {
-        toast.error('Invalid credentials. Please check your email and password.');
-      } else {
-        setError(error.message);
-        toast.error('An error occurred. Please try again later.');
-      }
+       setError(error.message);
     }
   };
 
